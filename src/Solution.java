@@ -25,17 +25,6 @@ public class Solution {
     }
 
 
-    private static int[][] initTab(int N, int H) {
-
-        int [][]tab = new int [H][N];
-        for (int i = 0; i < H ; i++) {
-            for (int j = 0; j < N ; j++) {
-                tab[i][j]=0;
-            }
-        }
-        return tab;
-    }
-
     private static void addDataToTab(int [][]tab) {
         for (int i = 0; i < tab[0].length; i++) {
             int u = scanner.nextInt();
@@ -77,8 +66,8 @@ public class Solution {
 
 
     public static void main(String[] args) {
-
-        int [][]tab = initTab(scanner.nextInt(),scanner.nextInt());
+        int tmp = scanner.nextInt();
+        int [][]tab = new int[scanner.nextInt()][tmp];
         int I=scanner.nextInt();
         addDataToTab(tab);
         initUnderSolutionTab(tab,I);
