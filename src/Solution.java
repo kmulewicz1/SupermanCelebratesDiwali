@@ -1,7 +1,17 @@
 
-        import java.util.*;
+import java.util.*;
 
 public class Solution {
+
+    static class Position {
+        int row;
+        int column;
+
+        public Position(int row, int column) {
+            this.row = row;
+            this.column = column;
+        }
+    }
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -48,20 +58,20 @@ public class Solution {
         }
     }
 
-    private static int sol(int row,int column, int [][]tab, int I, int [][]solActual) {
+    private static int sol(Position position, int [][]tab, int I, int [][]solActual) {
         int max;
-        if (row == tab.length) return -1;
+        if (position.row == tab.length) return -1;
         else {
-            for (int i = 0; i < tab[column].length ; i++) {
-                max=findMax(solActual,row,i,I);
+            for (int i = 0; i < tab[position.column].length ; i++) {
+                max=findMax(solActual,position.row,i,I);
 
-                    int down = solActual[row-1][i];
+                    int down = solActual[position.row-1][i];
                     if(down>max) max=down;
 
-                solActual[row][i]=tab[row][i]+max;
+                solActual[position.row][i]=tab[position.row][i]+max;
             }
-            row++;
-            return sol(row,column,tab,I,solActual);
+            position.row++;
+            return sol(position,tab,I,solActual);
         }
     }
 
@@ -76,7 +86,9 @@ public class Solution {
         addDataToTab(tab);
         initUnderSolutionTab(tab,solActual,I);
 
-        int wynik = sol(I,0,tab,I,solActual);
+        Position position = new Position(I,0);
+
+        int wynik = sol(position,tab,I,solActual);
 
         for (int i = 0; i < solActual[solActual.length-1].length; i++) {
             if (solActual[solActual.length-1][i]>wynik) wynik = solActual[solActual.length-1][i];
