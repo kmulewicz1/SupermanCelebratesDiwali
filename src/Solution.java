@@ -45,33 +45,31 @@ public class Solution {
         }
     }
 
-    private static void initUnderSolutionTab(int[][] tab, int [][]solActual, int I) {
-        for (int j = 0; j  < tab[0].length ; j++) {
-            solActual[0][j] = tab[0][j];
-        }
+    private static void initUnderSolutionTab(int[][] tab, int I) {
+
 
             for (int j = 1; j < I  ; j++) {
                 for (int i = 0; i < tab[0].length; i++) {
-                solActual[j][i] = solActual[j-1][i] + tab[j][i];
+                tab[j][i] += tab[j-1][i];
             }
 
         }
     }
 
-    private static int sol(Position position, int [][]tab, int I, int [][]solActual) {
+    private static int sol(Position position, int [][]tab, int I) {
         int max;
         if (position.row == tab.length) return -1;
         else {
             for (int i = 0; i < tab[position.column].length ; i++) {
-                max=findMax(solActual,position.row,i,I);
+                max=findMax(tab,position.row,i,I);
 
-                    int down = solActual[position.row-1][i];
+                    int down = tab[position.row-1][i];
                     if(down>max) max=down;
 
-                solActual[position.row][i]=tab[position.row][i]+max;
+                tab[position.row][i]=tab[position.row][i]+max;
             }
             position.row++;
-            return sol(position,tab,I,solActual);
+            return sol(position,tab,I);
         }
     }
 
@@ -82,16 +80,15 @@ public class Solution {
 
         int [][]tab = initTab(scanner.nextInt(),scanner.nextInt());
         int I=scanner.nextInt();
-        int [][]solActual = initTab(tab[0].length,tab.length);
         addDataToTab(tab);
-        initUnderSolutionTab(tab,solActual,I);
+        initUnderSolutionTab(tab,I);
 
         Position position = new Position(I,0);
 
-        int wynik = sol(position,tab,I,solActual);
+        int wynik = sol(position,tab,I);
 
-        for (int i = 0; i < solActual[solActual.length-1].length; i++) {
-            if (solActual[solActual.length-1][i]>wynik) wynik = solActual[solActual.length-1][i];
+        for (int i = 0; i < tab[tab.length-1].length; i++) {
+            if (tab[tab.length-1][i]>wynik) wynik = tab[tab.length-1][i];
         }
         System.out.println(wynik);
 
