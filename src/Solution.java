@@ -7,7 +7,7 @@ public class Solution {
         int row;
         int column;
 
-        public Position(int row, int column) {
+        Position(int row, int column) {
             this.row = row;
             this.column = column;
         }
@@ -80,8 +80,6 @@ public class Solution {
             if (tab[tab.length-1][i]>wynik) wynik = tab[tab.length-1][i];
         }
         System.out.println(wynik);
-
-
     }
 }
 
