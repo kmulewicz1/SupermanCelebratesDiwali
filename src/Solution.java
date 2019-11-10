@@ -35,8 +35,6 @@ public class Solution {
     }
 
     private static void initUnderSolutionTab(int[][] tab, int I) {
-
-
             for (int j = 1; j < I  ; j++) {
                 for (int i = 0; i < tab[0].length; i++) {
                 tab[j][i] += tab[j-1][i];
