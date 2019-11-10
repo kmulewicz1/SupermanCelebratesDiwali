@@ -1,2 +1,2 @@
 # SupermanCelebratesDiwali
-Solve of HackerRank's task
+Solve the HackerRank's task
